@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -7,21 +6,19 @@ import Reveal from "@/components/animations/Reveal";
 export default function PavilionSection() {
   return (
     <section className="pavilion-section">
-
       {/* Left Side - Club Image */}
       <div className="pavilion-image">
         <Image
-          src="/images/amphitheatre.webp"
-          alt="Guntur Club evening amphitheatre"
+          src="/images/pavilion.webp"
+          alt="GC Pavilion sports complex"
           fill
-          sizes="(max-width: 768px) 100vw, 52vw"
+          sizes="(max-width: 768px) 100vw, 53vw"
           className="pavilion-photo"
         />
       </div>
 
       {/* Right Side - Content */}
       <div className="pavilion-content">
-
         {/* Architectural Background Artwork */}
         <div className="pavilion-artwork" aria-hidden="true">
           <svg
@@ -49,10 +46,7 @@ export default function PavilionSection() {
 
         {/* Text Content */}
         <Reveal className="pavilion-text">
-
-          <p className="pavilion-eyebrow">
-            A New Chapter in Our Legacy
-          </p>
+          <p className="pavilion-eyebrow">A New Chapter in Our Legacy</p>
 
           <h2 className="pavilion-title">
             Introducing
@@ -61,23 +55,16 @@ export default function PavilionSection() {
           </h2>
 
           <p className="pavilion-description">
-            A contemporary home for world-class sports
-            and recreation. Discover professional
-            pickleball, billiards, snooker and
-            precision shooting.
+            A contemporary home for world-class sports and recreation. Discover
+            professional pickleball, billiards, snooker and precision shooting.
           </p>
 
-          <Link
-            href="/gc-pavilion"
-            className="pavilion-link"
-          >
+          <Link href="/gc-pavilion" className="pavilion-link">
             Explore the facilities
             <ArrowUpRight size={16} />
           </Link>
-
         </Reveal>
       </div>
-
     </section>
   );
 }

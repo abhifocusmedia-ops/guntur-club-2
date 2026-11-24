@@ -83,6 +83,7 @@ export default function Pavilion() {
       </section>
       <FacilityRows items={items} categories={categories} />
       <SectionCTA
+        caption="Contact the club for facility access, availability and sporting enquiries."
         title="A new dimension of sporting excellence."
         href="/contact"
         label="Enquire about Pavilion"

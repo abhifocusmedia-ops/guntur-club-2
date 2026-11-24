@@ -1,12 +1,86 @@
 /* Phase 2: scoped to Amenities; requires inner-pages.css from Phase 1. */
-.amenities-page .amenities-directory-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 24px;align-items:start;}
-.amenities-page .amenities-result-count {font-size:13px;color:var(--inner-muted);margin:18px 0;}
-.amenities-page .amenities-directory-card {min-width:0;scroll-margin-top:140px;border-bottom:1px solid #cbb997;}
-.amenities-page .amenities-directory-card .amenities-directory-photo {height:240px;min-height:0;max-height:none;}
-.amenities-page .amenities-directory-copy {padding:18px 0;}
-.amenities-page .amenities-directory-copy h3 {font:400 clamp(22px,2vw,28px)/1.25 Georgia,serif;margin:10px 0;}
-.amenities-page .amenities-directory-copy .body-copy {font-size:14px;line-height:1.7;min-height:72px;}
-.amenities-page .amenities-directory-copy .gold-link {margin-top:8px;}
-.amenities-page #facilities {scroll-margin-top:130px;}
-@media(max-width:1024px){.amenities-page .amenities-directory-grid {grid-template-columns:repeat(2,minmax(0,1fr));}.amenities-page .amenities-directory-card .amenities-directory-photo {height:220px;}}
-@media(max-width:600px){.amenities-page .amenities-directory-grid {grid-template-columns:1fr;gap:22px;}.amenities-page .amenities-directory-card .amenities-directory-photo {height:230px;}.amenities-page .amenities-directory-copy .body-copy {min-height:0;}.amenities-page .amenities-directory-card,.amenities-page #facilities {scroll-margin-top:95px;}}
+.amenities-page .amenities-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px 24px;
+  align-items: stretch;
+}
+.amenities-page .amenities-result-count {
+  font-size: 13px;
+  color: var(--inner-muted);
+  margin: 18px 0;
+}
+.amenities-page .amenities-directory-card {
+  min-width: 0;
+  scroll-margin-top: 140px;
+  border-bottom: 1px solid #cbb997;
+}
+.amenities-page .amenities-directory-card .amenities-directory-photo {
+  height: 240px;
+  min-height: 0;
+  max-height: none;
+}
+.amenities-page .amenities-directory-copy {
+  padding: 18px 0;
+}
+.amenities-page .amenities-directory-copy h3 {
+  font:
+    400 clamp(22px, 2vw, 28px)/1.25 Georgia,
+    serif;
+  margin: 10px 0;
+}
+.amenities-page .amenities-directory-copy .body-copy {
+  font-size: 14px;
+  line-height: 1.7;
+  min-height: 72px;
+}
+.amenities-page .amenities-directory-copy .gold-link {
+  margin-top: 8px;
+}
+.amenities-page #facilities {
+  scroll-margin-top: 130px;
+}
+@media (max-width: 1024px) {
+  .amenities-page .amenities-directory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .amenities-page .amenities-directory-card .amenities-directory-photo {
+    height: 220px;
+  }
+}
+@media (max-width: 600px) {
+  .amenities-page .amenities-directory-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .amenities-page .amenities-directory-card .amenities-directory-photo {
+    height: 230px;
+  }
+  .amenities-page .amenities-directory-copy .body-copy {
+    min-height: 0;
+  }
+  .amenities-page .amenities-directory-card,
+  .amenities-page #facilities {
+    scroll-margin-top: 95px;
+  }
+}
+
+/* Facilities awaiting authentic photography */
+.amenities-page .amenity-text-card {
+  background: var(--inner-ivory);
+  border: 1px solid #d8c8ac;
+  display: flex;
+  align-items: center;
+  padding: 28px;
+}
+.amenities-page .amenity-text-card .amenities-directory-copy {
+  padding: 0;
+}
+.amenities-page .amenity-text-card .body-copy {
+  min-height: 0;
+}
+@media (max-width: 768px) {
+  .amenities-page .amenity-text-card {
+    padding: 22px;
+  }
+}

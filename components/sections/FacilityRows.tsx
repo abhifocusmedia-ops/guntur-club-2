@@ -1,9 +1,11 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import Photo from "@/components/ui/Photo";
+
 export type FacilityRow = {
   id: string;
   category: string;
@@ -12,7 +14,9 @@ export type FacilityRow = {
   image: string | null;
   href: string;
   label: string;
+  theme?: "inner-ivory" | "inner-cream" | "inner-dark";
 };
+
 export default function FacilityRows({
   items,
   categories,
@@ -22,6 +26,7 @@ export default function FacilityRows({
 }) {
   const [filter, setFilter] = useState("All");
   const reduced = useReducedMotion();
+  const textOnly = items.every((item) => !item.image);
   useEffect(() => {
     const sync = () => {
       const url = new URL(window.location.href);
@@ -45,7 +50,9 @@ export default function FacilityRows({
     const id = window.location.hash.slice(1);
     if (!id) return;
     const frame = requestAnimationFrame(() =>
-      document.getElementById(id)?.scrollIntoView({ block: "start" }),
+      document
+        .getElementById(id)
+        ?.scrollIntoView({ block: "start", behavior: "instant" }),
     );
     return () => cancelAnimationFrame(frame);
   }, [filter]);
@@ -55,7 +62,7 @@ export default function FacilityRows({
     url.hash = "";
     if (c === "All") url.searchParams.delete("category");
     else url.searchParams.set("category", c.toLowerCase().replaceAll(" ", "-"));
-    window.history.replaceState(null, "", url);
+    window.history.replaceState(window.history.state, "", url);
   }
   const visible = items.filter(
     (i) => filter === "All" || i.category === filter,
@@ -85,64 +92,91 @@ export default function FacilityRows({
           <p className="body-copy mt-4" aria-live="polite">
             {visible.length} facilities
           </p>
+          {textOnly && (
+            <div className="refined-sport-grid">
+              <AnimatePresence initial={false}>
+                {visible.map((i) => (
+                  <motion.article
+                    key={i.id}
+                    id={i.id}
+                    className="refined-sport-card"
+                    layout={!reduced}
+                    initial={reduced ? false : { opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: reduced ? 0 : 0.35 }}
+                  >
+                    <p className="eyebrow">{i.category}</p>
+                    <h3>{i.title}</h3>
+                    <p className="body-copy">{i.description}</p>
+                    <Link href={i.href} className="gold-link">
+                      {i.label}
+                      <ArrowUpRight size={16} />
+                    </Link>
+                  </motion.article>
+                ))}
+              </AnimatePresence>
+            </div>
+          )}
         </div>
       </section>
-      <AnimatePresence initial={false}>
-        {visible.map((i) => {
-          const index = items.indexOf(i);
-          return (
-            <motion.section
-              key={i.id}
-              id={i.id}
-              className={`section facility-row ${index % 3 === 1 ? "inner-cream" : "inner-ivory"}`}
-              initial={reduced ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: reduced ? 0 : 0.35 }}
-            >
-              <div
-                className={`container inner-editorial ${index % 2 ? "is-reversed" : ""}`}
+      {!textOnly && (
+        <AnimatePresence initial={false}>
+          {visible.map((i) => {
+            const index = items.indexOf(i);
+            const theme =
+              i.theme ?? (index % 3 === 1 ? "inner-cream" : "inner-ivory");
+            return (
+              <motion.section
+                key={i.id}
+                id={i.id}
+                className={`section facility-row ${theme}`}
+                initial={reduced ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reduced ? 0 : 0.35 }}
               >
-                <motion.div
-                  initial={
-                    reduced ? false : { opacity: 0, x: index % 2 ? 24 : -24 }
-                  }
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: reduced ? 0 : 0.7 }}
+                <div
+                  className={`container ${i.image ? `inner-editorial ${index % 2 ? "is-reversed" : ""}` : "refined-facility-text"}`}
                 >
-                  {i.image ? (
-                    <Photo
-                      src={i.image}
-                      alt={i.title}
-                      className="inner-photo"
-                    />
-                  ) : (
-                    <div className="facility-image-pending">
-                      <span className="eyebrow">GC Pavilion</span>
-                      <p>Individual facility photograph pending</p>
-                    </div>
+                  {i.image && (
+                    <motion.div
+                      initial={
+                        reduced
+                          ? false
+                          : { opacity: 0, x: index % 2 ? 24 : -24 }
+                      }
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: reduced ? 0 : 0.7 }}
+                    >
+                      <Photo
+                        src={i.image}
+                        alt={i.title}
+                        className="inner-photo"
+                      />
+                    </motion.div>
                   )}
-                </motion.div>
-                <motion.div
-                  initial={reduced ? false : { opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: reduced ? 0 : 0.65 }}
-                >
-                  <p className="eyebrow mb-3">{i.category}</p>
-                  <h2 className="section-heading mb-5">{i.title}</h2>
-                  <p className="body-copy mb-5">{i.description}</p>
-                  <Link href={i.href} className="gold-link">
-                    {i.label}
-                    <ArrowUpRight size={16} />
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.section>
-          );
-        })}
-      </AnimatePresence>
+                  <motion.div
+                    initial={reduced ? false : { opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: reduced ? 0 : 0.65 }}
+                  >
+                    <p className="eyebrow mb-3">{i.category}</p>
+                    <h2 className="section-heading mb-5">{i.title}</h2>
+                    <p className="body-copy mb-5">{i.description}</p>
+                    <Link href={i.href} className="gold-link">
+                      {i.label}
+                      <ArrowUpRight size={16} />
+                    </Link>
+                  </motion.div>
+                </div>
+              </motion.section>
+            );
+          })}
+        </AnimatePresence>
+      )}
     </>
   );
 }

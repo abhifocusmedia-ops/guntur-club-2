@@ -48,6 +48,7 @@ const items: FacilityRow[] = [
   },
   {
     id: "amphitheatre",
+    theme: "inner-dark",
     category: "Outdoor Spaces",
     title: "Grand Open-Air Amphitheatre",
     description:
@@ -77,6 +78,7 @@ export default function Stay() {
       </section>
       <FacilityRows items={items} categories={categories} />
       <SectionCTA
+        caption="Speak with our team about guest room availability, venue arrangements and your next gathering."
         title="Let’s plan something memorable."
         href="/contact"
         label="Make an enquiry"

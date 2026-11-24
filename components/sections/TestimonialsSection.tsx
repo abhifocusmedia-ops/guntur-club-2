@@ -2,7 +2,14 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+} from "framer-motion";
+
 import {
   ArrowLeft,
   ArrowRight,
@@ -12,57 +19,84 @@ import {
 import Reveal from "@/components/animations/Reveal";
 import { GoldenWaves } from "@/components/artwork/GoldenWaves";
 
-interface Testimonial {
-  name: string;
-  designation: string;
-  message: string;
-}
-
-
-const testimonials: Testimonial[] = [
+const testimonials = [
   {
     name: "K. Venkateswara Rao",
     designation: "Club Member",
+    image: "/images/testimonials/venkateswara-rao.jpg",
+    initials: "VR",
     message:
       "This club is a great value for the money. The membership fees are reasonable.",
   },
   {
     name: "M. Anil Kumar",
     designation: "Club Member",
+    image: "/images/testimonials/anil-kumar.jpg",
+    initials: "AK",
     message:
       "I love this club! The facilities are top-notch, the staff is friendly and helpful, and the atmosphere is fantastic.",
   },
   {
     name: "O. Venkata Ramana",
     designation: "Club Member",
+    image: "/images/testimonials/venkata-ramana.jpg",
+    initials: "VR",
     message:
       "The food and drinks at this club are excellent.",
   },
 ];
 
+function MemberPortrait({
+  member,
+}: {
+  member: (typeof testimonials)[number];
+}) {
+  const [imageError, setImageError] = useState(false);
+
+  return (
+    <div className="testimonial-portrait-frame">
+      <div className="testimonial-portrait">
+
+        {!imageError ? (
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            sizes="160px"
+            className="testimonial-member-photo"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <span className="testimonial-initials">
+            {member.initials}
+          </span>
+        )}
+
+      </div>
+    </div>
+  );
+}
 
 export default function TestimonialsSection() {
   const [active, setActive] = useState(0);
+  const reducedMotion = useReducedMotion();
+
+  const current = testimonials[active];
 
   const next = () => {
-    if (!testimonials.length) return;
-
     setActive(
-      (current) => (current + 1) % testimonials.length
+      (previous) =>
+        (previous + 1) % testimonials.length
     );
   };
 
   const previous = () => {
-    if (!testimonials.length) return;
-
     setActive(
-      (current) =>
-        (current - 1 + testimonials.length) %
+      (previous) =>
+        (previous - 1 + testimonials.length) %
         testimonials.length
     );
   };
-
-  const current = testimonials[active];
 
   return (
     <section className="section home-testimonials">
@@ -78,98 +112,127 @@ export default function TestimonialsSection() {
           </p>
 
           <h2 className="section-heading">
-            Stories from Our{" "}
-            <em className="text-gold">Community.</em>
+            Stories from{" "}
+            <em className="text-gold">
+              Our Community.
+            </em>
           </h2>
 
         </Reveal>
 
-        <div className="testimonial-content">
+        <div
+          className="testimonial-content"
+          aria-live="polite"
+        >
 
-          <Quote
-            className="testimonial-quote"
-            size={44}
-            strokeWidth={1}
-          />
+          <AnimatePresence mode="wait">
 
-          {current ? (
-            <>
-              <AnimatePresence mode="wait">
+            <motion.div
+              key={current.name}
+              className="testimonial-member-layout"
 
-                <motion.div
-                  key={active}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.45 }}
-                >
+              initial={
+                reducedMotion
+                  ? false
+                  : { opacity: 0, y: 18 }
+              }
 
-                  <blockquote className="testimonial-message">
-                    {current.message}
-                  </blockquote>
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
 
-                  <div className="testimonial-divider" />
+              exit={{
+                opacity: 0,
+                y: -12,
+              }}
 
-                  <h3 className="testimonial-name">
-                    {current.name}
-                  </h3>
+              transition={{
+                duration: reducedMotion ? 0 : 0.45,
+                ease: "easeInOut",
+              }}
+            >
 
-                  <p className="eyebrow mt-2">
-                    {current.designation}
-                  </p>
+              {/* Member photograph */}
 
-                </motion.div>
+              <MemberPortrait member={current} />
 
-              </AnimatePresence>
+              {/* Testimonial message */}
 
-              {testimonials.length > 1 && (
-                <div className="testimonial-controls">
+              <div className="testimonial-copy">
 
-                  <button
-                    onClick={previous}
-                    aria-label="Previous testimonial"
-                  >
-                    <ArrowLeft size={18} />
-                  </button>
+                <Quote
+                  size={34}
+                  strokeWidth={1.2}
+                  className="testimonial-quote"
+                  aria-hidden="true"
+                />
 
-                  <div className="testimonial-dots">
+                <blockquote className="testimonial-message">
+                  “{current.message}”
+                </blockquote>
 
-                    {testimonials.map((item, index) => (
-                      <button
-                        key={index}
-                        className={
-                          index === active
-                            ? "active"
-                            : ""
-                        }
-                        onClick={() => setActive(index)}
-                        aria-label={`Testimonial ${index + 1}`}
-                        aria-pressed={index === active}
-                      />
-                    ))}
+                <div className="testimonial-divider" />
 
-                  </div>
+                <h3 className="testimonial-name">
+                  {current.name}
+                </h3>
 
-                  <button
-                    onClick={next}
-                    aria-label="Next testimonial"
-                  >
-                    <ArrowRight size={18} />
-                  </button>
+                <p className="eyebrow mt-2">
+                  {current.designation}
+                </p>
 
-                </div>
-              )}
-            </>
-          ) : (
-            <p className="testimonial-message">
-              Member stories and experiences
-              will be featured here.
-            </p>
-          )}
+              </div>
+
+            </motion.div>
+
+          </AnimatePresence>
+
+          {/* Slider navigation */}
+
+          <div className="testimonial-controls">
+
+            <button
+              type="button"
+              onClick={previous}
+              aria-label="Previous testimonial"
+            >
+              <ArrowLeft size={18} />
+            </button>
+
+            <div className="testimonial-dots">
+
+              {testimonials.map((item, index) => (
+
+                <button
+                  key={item.name}
+                  type="button"
+                  onClick={() => setActive(index)}
+                  className={
+                    active === index ? "active" : ""
+                  }
+                  aria-label={`View testimonial ${index + 1}`}
+                  aria-pressed={active === index}
+                />
+
+              ))}
+
+            </div>
+
+            <button
+              type="button"
+              onClick={next}
+              aria-label="Next testimonial"
+            >
+              <ArrowRight size={18} />
+            </button>
+
+          </div>
 
         </div>
 
       </div>
+
     </section>
   );
 }

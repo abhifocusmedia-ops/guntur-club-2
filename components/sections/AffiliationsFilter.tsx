@@ -1,1 +1,67 @@
-"use client";import {useState} from 'react';import {affiliations} from '@/data/site';import {AnimatePresence,motion} from 'framer-motion';export default function AffiliationsFilter(){const [state,setState]=useState('All');const states=['All',...Object.keys(affiliations)];const groups=state==='All'?Object.entries(affiliations):[[state,affiliations[state]]];return <><div className="flex flex-wrap gap-3 mb-12" role="group" aria-label="Filter clubs by state">{states.map(s=><button key={s} onClick={()=>setState(s)} className={'filter '+(state===s?'active':'')} aria-pressed={state===s}>{s}</button>)}</div><AnimatePresence mode="wait"><motion.div key={state} initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-15}} transition={{duration:.3}} className="grid md:grid-cols-2 gap-x-16">{groups.map(([name,clubs])=><div key={name as string} className="mb-12"><p className="eyebrow mb-5">{name}</p>{(clubs as string[]).map((c,i)=><div key={c} className="py-5 border-b border-[#66503a] flex gap-5 items-center"><span className="text-gold text-xs">{String(i+1).padStart(2,'0')}</span><h3 className="serif text-2xl">{c}</h3></div>)}</div>)}</motion.div></AnimatePresence></>}
+"use client";
+import { useState } from "react";
+import { affiliations } from "@/data/site";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { MapPin } from "lucide-react";
+
+export default function AffiliationsFilter() {
+  const [state, setState] = useState("All");
+  const reduced = useReducedMotion();
+  const groups = Object.entries(affiliations).filter(
+    ([name]) => state === "All" || name === state,
+  );
+  const count = groups.reduce((sum, [, clubs]) => sum + clubs.length, 0);
+  return (
+    <>
+      <div
+        className="inner-filter affiliation-filters"
+        role="group"
+        aria-label="Filter clubs by state"
+      >
+        {["All", ...Object.keys(affiliations)].map((name) => (
+          <button
+            type="button"
+            key={name}
+            aria-pressed={state === name}
+            onClick={() => setState(name)}
+          >
+            {name}
+          </button>
+        ))}
+      </div>
+      <p className="body-copy affiliation-count" role="status">
+        {count} affiliated {count === 1 ? "club" : "clubs"}
+      </p>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={state}
+          className="affiliation-grid"
+          initial={reduced ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: reduced ? 0 : 0.28 }}
+        >
+          {groups.map(([name, clubs]) => (
+            <article className="affiliation-card" key={name}>
+              <header>
+                <MapPin size={20} aria-hidden="true" />
+                <div>
+                  <h3>{name}</h3>
+                  <p className="eyebrow">
+                    {clubs.length} affiliated{" "}
+                    {clubs.length === 1 ? "club" : "clubs"}
+                  </p>
+                </div>
+              </header>
+              <ul>
+                {clubs.map((club) => (
+                  <li key={club}>{club}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </motion.div>
+      </AnimatePresence>
+    </>
+  );
+}

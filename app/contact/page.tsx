@@ -1,20 +1,32 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import EnquiryForm from "@/components/ui/EnquiryForm";
+import Reveal from "@/components/animations/Reveal";
 import { contact } from "@/data/site";
+
 export const metadata: Metadata = { title: "Contact Us" };
+const enquiryTypes: Record<string, string> = {
+  "guest-room": "Guest Room Enquiry",
+  "function-hall": "Function Hall Enquiry",
+  membership: "Membership Enquiry",
+  amenity: "Amenity Enquiry",
+  pavilion: "Amenity Enquiry",
+  general: "General Enquiry",
+};
+const tel = (phone: string) => `tel:${phone.replace(/\D/g, "")}`;
 export default async function Contact({
   searchParams,
 }: {
-  searchParams: Promise<{ type?: string }>;
+  searchParams: Promise<{ type?: string | string[] }>;
 }) {
   const { type } = await searchParams;
   const enquiryType =
-    type === "guest-room"
-      ? "Guest Room Enquiry"
-      : type === "function-hall"
-        ? "Function Hall Enquiry"
-        : "General Enquiry";
+    typeof type === "string" &&
+    Object.prototype.hasOwnProperty.call(enquiryTypes, type)
+      ? enquiryTypes[type]
+      : "General Enquiry";
   return (
     <div className="inner-page remaining-page contact-inner">
       <PageHero
@@ -23,77 +35,79 @@ export default async function Contact({
         image="/images/club-exterior.webp"
       />
       <section className="section inner-ivory">
-        <div className="container editorial-grid !items-start">
-          <div>
-            <p className="eyebrow mb-7">Guntur Club</p>
-            <h2 className="section-heading">
-              We Look Forward to Hearing from You.
+        <div className="container inner-editorial enquiry-editorial">
+          <Reveal>
+            <p className="eyebrow mb-3">Guntur Club</p>
+            <h2 className="section-heading mb-5">
+              We look forward to hearing from you.
             </h2>
-            <p className="body-copy my-8">
-              Whether you have a question, need assistance or wish to explore
-              the club, our team is here to help.
+            <p className="body-copy mb-6">
+              Contact our team for club information, reservations and membership
+              enquiries.
             </p>
-            <address className="not-italic space-y-7">
+            <address className="contact-directory not-italic">
               <div>
-                <p className="eyebrow">Visit Us</p>
-                <p className="body-copy mt-3">{contact.address}</p>
+                <MapPin size={22} aria-hidden="true" />
+                <div>
+                  <p className="eyebrow">Visit Us</p>
+                  <p className="body-copy">{contact.address}</p>
+                </div>
               </div>
               <div>
-                <p className="eyebrow">Telephone</p>
-                <a className="block mt-3 serif text-2xl" href="tel:08632233703">
-                  {contact.phone}
-                </a>
-                <a className="block mt-2 serif text-2xl" href="tel:08632355241">
-                  {contact.phone2}
-                </a>
+                <Phone size={22} aria-hidden="true" />
+                <div>
+                  <p className="eyebrow">Telephone</p>
+                  <a href={tel(contact.phone)}>{contact.phone}</a>
+                  <a href={tel(contact.phone2)}>{contact.phone2}</a>
+                </div>
               </div>
               <div>
-                <p className="eyebrow">Email</p>
-                <a
-                  className="block mt-3 serif text-2xl"
-                  href={"mailto:" + contact.email}
-                >
-                  {contact.email}
-                </a>
+                <Mail size={22} aria-hidden="true" />
+                <div>
+                  <p className="eyebrow">Email</p>
+                  <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                </div>
               </div>
             </address>
-            <a
-              className="gold-link mt-7"
-              href={contact.map}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Get Directions ↗
-            </a>
-          </div>
-          <div className="remaining-form">
-            <p className="eyebrow mb-4">Send a Message</p>
-            <h3 className="serif text-4xl mb-9">How May We Help?</h3>
-            <EnquiryForm defaultType={enquiryType} />
+          </Reveal>
+          <div id="contact-enquiry" className="remaining-form">
+            <p className="eyebrow mb-3">Send a Message</p>
+            <h3 className="serif">How May We Help?</h3>
+            <EnquiryForm key={enquiryType} defaultType={enquiryType} />
+            <Link href="/privacy-policy" className="gold-link mt-4">
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </section>
-      <section className="section inner-cream text-center">
-        <div className="container">
-          <p className="eyebrow mb-5">Find Us</p>
-          <h2 className="section-heading mb-7">At the Heart of Guntur.</h2>
-          <p className="body-copy mx-auto mb-7">{contact.address}</p>
+      <section className="section inner-cream">
+        <div className="container enquiry-assistance">
+          <Reveal>
+            <p className="eyebrow mb-3">Find Us</p>
+            <h2 className="section-heading mb-4">At the heart of Guntur.</h2>
+            <p className="body-copy">{contact.address}</p>
+          </Reveal>
           <a
             className="btn"
             href={contact.map}
             target="_blank"
             rel="noopener noreferrer"
           >
-            View Location on Google Maps ↗
+            Get Directions <ArrowUpRight size={16} />
           </a>
         </div>
       </section>
       <section className="section inner-dark">
-        <div className="container">
-          <p className="eyebrow mb-3">Here to help</p>
-          <h2 className="section-heading mb-4">Speak with our team.</h2>
-          <a className="gold-link" href="tel:08632233703">
-            0863 2233 703
+        <div className="container enquiry-assistance">
+          <div>
+            <p className="eyebrow mb-3">Here to Help</p>
+            <h2 className="section-heading mb-3">Prefer to speak directly?</h2>
+            <p className="body-copy">
+              Call the club for assistance with your enquiry.
+            </p>
+          </div>
+          <a className="gold-link" href={tel(contact.phone)}>
+            {contact.phone}
           </a>
         </div>
       </section>

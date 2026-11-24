@@ -15,7 +15,7 @@ const services = [
   {
     title: "Health Camp for Members",
     description:
-      "Member-focused health and fitness services, with cardio and resistance equipment and experienced trainer guidance.",
+      "Discover member-focused wellness initiatives. Contact the club for information about upcoming health camps and available programmes.",
     image: "/images/services/health-camp.jpg",
     href: "/services",
   },
