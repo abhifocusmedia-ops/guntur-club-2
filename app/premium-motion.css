@@ -1,0 +1,28 @@
+/* Premium motion: inner pages only; no dimensions or theme changes. */
+@keyframes pm-hero-zoom { from { transform: scale(1.065); } to { transform: scale(1); } }
+@keyframes pm-mask-up { from { transform: translateY(110%); } to { transform: translateY(0); } }
+@keyframes pm-fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pm-uncover-left { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+@keyframes pm-uncover-right { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0); } }
+@keyframes pm-text-reveal { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes pm-art-drift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  #main-content .inner-page .premium-page-hero { overflow: hidden; }
+  #main-content .inner-page .premium-hero-image { animation: pm-hero-zoom 2.2s cubic-bezier(.22,1,.36,1) both; }
+  #main-content .inner-page .premium-hero-title { overflow: hidden; }
+  #main-content .inner-page .premium-hero-title > span { display: block; animation: pm-mask-up 1s cubic-bezier(.22,1,.36,1) .12s both; }
+  #main-content .inner-page .premium-hero-eyebrow { animation: pm-fade-up .7s ease-out both; }
+  #main-content .inner-page .premium-hero-breadcrumb { animation: pm-fade-up .7s ease-out .32s both; }
+  #main-content .inner-page .pm-enter-left { animation: pm-uncover-left 1.2s cubic-bezier(.22,1,.36,1); }
+  #main-content .inner-page .pm-enter-right { animation: pm-uncover-right 1.2s cubic-bezier(.22,1,.36,1); }
+  #main-content .inner-page .pm-enter-text { animation: pm-text-reveal .9s cubic-bezier(.22,1,.36,1); }
+  #main-content .inner-page .premium-page-hero .flowing-art svg { animation: pm-art-drift 18s ease-in-out infinite; }
+  #main-content .inner-page .gold-link svg { transition: transform .4s cubic-bezier(.22,1,.36,1); }
+  #main-content .inner-page .gold-link:hover svg { transform: translate(3px,-3px); }
+}
+/* Keep mobile image reveals quick and subtle. */
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+  #main-content .inner-page :is(.pm-enter-left,.pm-enter-right) { animation-duration: .8s; }
+  #main-content .inner-page .premium-hero-title > span { animation-duration: .75s; }
+}

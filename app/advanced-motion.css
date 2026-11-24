@@ -1,0 +1,32 @@
+/* Additive motion only. No changes to layout, colour themes or existing keyframes. */
+.gc-route-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: #150D0E;
+  border-bottom: 3px solid #D4B163;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+@keyframes gc-ambient-art {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #main-content .gc-advanced-active .section .flowing-art svg {
+    animation: gc-ambient-art 22s ease-in-out infinite;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) and (min-width: 769px) {
+  #main-content .gc-parallax img {
+    translate: 0 var(--gc-parallax, 0px);
+    scale: 1.14;
+  }
+  #main-content .gc-magnetic {
+    translate: var(--gc-mx, 0px) var(--gc-my, 0px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gc-route-curtain { display: none; }
+}
