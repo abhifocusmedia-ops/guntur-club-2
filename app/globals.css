@@ -2,13 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-  --ink: #150D0E;
-  --ink2: #1D1715;
-  --gold: #D4B163;
-  --ivory: #F8F5ED;
-  --muted: #B6AFA4 ;
-  --font-heading: var(--font-cormorant), var(--font-heading);
-  --font-body: var(--font-manrope), var(--font-body);
+    --ink: #150D0E;
+    --ink2: #1D1715;
+    --gold: #D4B163;
+    --ivory: #F8F5ED;
+    --muted: #B6AFA4;
+
+    --font-heading: var(--font-cormorant, Georgia), serif;
+    --font-body: var(--font-manrope, Arial), sans-serif;
 }
 
 * {
@@ -89,9 +90,9 @@ button:disabled {
   align-items: center;
   gap: 15px;
   text-transform: uppercase;
-  letter-spacing: .16em;
-  font-size: 11px;
-  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--gold);
   padding-block: 12px;
   border-bottom: 1px solid #d4b1637d;
@@ -102,33 +103,175 @@ button:disabled {
   gap: 23px;
 }
 
+
+
+/* =========================================
+   GUNTUR CLUB — UNIFIED BUTTON SYSTEM
+========================================= */
+
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  padding: 16px 23px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  font-size: 11px;
-  transition: background .3s, color .3s;
+    --btn-text: #D4B163;
+    --btn-border: #D4B163;
+    --btn-background: transparent;
+    --btn-hover-background: #D4B163;
+    --btn-hover-text: #150D0E;
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    min-height: 48px;
+    padding: 15px 25px;
+
+    border: 1px solid var(--btn-border);
+    border-radius: 0;
+
+    background: var(--btn-background);
+    color: var(--btn-text);
+
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+    text-align: center;
+
+    transition:
+        color 0.35s ease,
+        border-color 0.35s ease;
 }
 
-.btn:hover {
-  background: var(--gold);
-  color: #1a1010;
+/* Double-side background animation */
+
+.btn::before,
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 51%;
+    z-index: -1;
+
+    background: var(--btn-hover-background);
+
+    transform: scaleX(0);
+    transition: transform 0.5s
+        cubic-bezier(0.76, 0, 0.24, 1);
+
+    pointer-events: none;
 }
+
+.btn::before {
+    left: 0;
+    transform-origin: left center;
+}
+
+.btn::after {
+    right: 0;
+    transform-origin: right center;
+}
+
+.btn:hover,
+.btn:focus-visible {
+    background: var(--btn-background);
+    color: var(--btn-hover-text);
+}
+
+.btn:hover::before,
+.btn:hover::after,
+.btn:focus-visible::before,
+.btn:focus-visible::after {
+    transform: scaleX(1);
+}
+
+/* Arrow animation */
+
+.btn svg {
+    flex-shrink: 0;
+    transition: transform 0.35s ease;
+}
+
+.btn:hover svg,
+.btn:focus-visible svg {
+    transform: translate(3px, -3px);
+}
+
+/* Solid gold variation */
 
 .btn-solid {
-  background: var(--gold);
-  color: #190e10;
+    --btn-text: #150D0E;
+    --btn-background: #D4B163;
+    --btn-hover-background: #150D0E;
+    --btn-hover-text: #D4B163;
 }
 
-.btn-solid:hover {
-  background: #f0d399;
+/* Outline buttons on light backgrounds */
+
+:is(.cream, .inner-ivory, .inner-cream)
+.btn:not(.btn-solid) {
+    --btn-text: #80602D;
+    --btn-border: #927037;
+    --btn-hover-background: #D4B163;
+    --btn-hover-text: #150D0E;
 }
+
+/* Hero buttons */
+
+.hero-slider .btn {
+    font-size: 14px;
+    padding: 17px 28px;
+}
+
+/* Navbar membership button */
+
+header .btn {
+    font-size: 13px;
+    min-height: 44px;
+    padding: 13px 20px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+    .btn,
+    .hero-slider .btn {
+        font-size: 14px;
+        padding: 14px 20px;
+        max-width: 100%;
+    }
+}
+
+/* Disabled state */
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn:disabled::before,
+.btn:disabled::after {
+    transform: scaleX(0);
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn::before,
+    .btn::after,
+    .btn svg {
+        transition: none;
+    }
+}
+
 
 .section {
   padding: clamp(85px, 11vw, 175px) 0;
@@ -247,10 +390,11 @@ button:disabled {
 }
 
 .foot-grid a {
-  display: block;
-  color: #c1b9a8;
-  font-size: 13px;
-  margin-top: 10px;
+    display: block;
+    color: #c1b9a8;
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .foot-grid a:hover {
@@ -332,11 +476,14 @@ button:disabled {
 }
 
 .nav-link {
-  font-size: 10px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  position: relative;
-  padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+    padding: 12px 0;
+    white-space: nowrap;
 }
 
 .nav-link:after {
@@ -1306,7 +1453,7 @@ button:disabled {
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   color: #927037;
   white-space: nowrap;
   transition: color 0.3s ease;
@@ -2706,5 +2853,16 @@ footer.site-footer {
     .site-footer .footer-bottom {
         margin-top: 25px;
         padding-top: 15px;
+    }
+}
+@media (min-width: 1101px) and (max-width: 1440px) {
+    .nav-link {
+        font-size: 12px;
+        letter-spacing: 0.02em;
+    }
+
+    header .btn {
+        font-size: 12px;
+        padding: 12px 16px;
     }
 }

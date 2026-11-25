@@ -24,15 +24,14 @@
   padding: 18px 0;
 }
 .amenities-page .amenities-directory-copy h3 {
-  font:
-    400 clamp(22px, 2vw, 28px)/1.25 Georgia,
-    serif;
-  margin: 10px 0;
+    font: 500 clamp(22px, 2vw, 28px)/1.25 var(--font-heading);
+    margin: 10px 0;
 }
 .amenities-page .amenities-directory-copy .body-copy {
-  font-size: 14px;
-  line-height: 1.7;
-  min-height: 72px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.8;
+    min-height: 72px;
 }
 .amenities-page .amenities-directory-copy .gold-link {
   margin-top: 8px;

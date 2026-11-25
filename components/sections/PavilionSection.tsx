@@ -59,7 +59,7 @@ export default function PavilionSection() {
             professional pickleball, billiards, snooker and precision shooting.
           </p>
 
-          <Link href="/gc-pavilion" className="pavilion-link">
+          <Link href="/gc-pavilion" className="btn">
             Explore the facilities
             <ArrowUpRight size={16} />
           </Link>
