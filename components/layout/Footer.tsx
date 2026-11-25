@@ -4,7 +4,7 @@ import { contact, nav, amenities } from "@/data/site";
 import { GoldenWaves } from "@/components/artwork/GoldenWaves";
 export default function Footer() {
   return (
-    <footer className="relative section pb-8 border-t border-[#514331] overflow-hidden">
+    <footer className="site-footer relative section pb-8 border-t border-[#514331] overflow-hidden">
       <GoldenWaves />
       <div className="container relative z-10">
         <div className="foot-grid">

@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -12,8 +13,6 @@ import AnimatedCounter from "@/components/animations/AnimatedCounter";
 import HeritageTimeline from "@/components/sections/HeritageTimeline";
 import CommitteeSection from "@/components/sections/CommitteeSection";
 
-import { GoldenWaves } from "@/components/artwork/GoldenWaves";
-
 export const metadata: Metadata = {
   title: "About Us",
   description:
@@ -23,6 +22,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <div className="about-page inner-page">
+
       {/* 01 — Page Banner */}
 
       <PageHero
@@ -35,11 +35,11 @@ export default function About() {
 
       <section className="about-stats">
         <div className="container stats">
+
           <Reveal className="stat">
             <strong>
               <AnimatedCounter value={1700} separator={true} suffix="+" />
             </strong>
-
             <p className="eyebrow mt-3">Distinguished Members</p>
           </Reveal>
 
@@ -47,7 +47,6 @@ export default function About() {
             <strong>
               <AnimatedCounter value={16} />
             </strong>
-
             <p className="eyebrow mt-3">Affiliated Clubs</p>
           </Reveal>
 
@@ -55,7 +54,6 @@ export default function About() {
             <strong>
               <AnimatedCounter value={97} />
             </strong>
-
             <p className="eyebrow mt-3">Years of Prestige · 2026</p>
           </Reveal>
 
@@ -63,9 +61,9 @@ export default function About() {
             <strong>
               <AnimatedCounter value={3} suffix=" Acres" />
             </strong>
-
             <p className="eyebrow mt-3">Club Campus</p>
           </Reveal>
+
         </div>
       </section>
 
@@ -73,6 +71,7 @@ export default function About() {
 
       <section className="section cream about-intro">
         <div className="container editorial-grid">
+
           {/* Left — Aerial Image */}
 
           <Reveal className="about-image-wrap">
@@ -82,7 +81,9 @@ export default function About() {
               className="about-campus-photo"
             />
 
-            <div className="about-image-label">A Campus with Character</div>
+            <div className="about-image-label">
+              A Campus with Character
+            </div>
           </Reveal>
 
           {/* Right — About Content */}
@@ -113,6 +114,7 @@ export default function About() {
               <ArrowUpRight size={16} />
             </Link>
           </Reveal>
+
         </div>
       </section>
 
@@ -120,9 +122,11 @@ export default function About() {
 
       <HeritageTimeline />
 
-      {/* 05 — Membership Invitation */}
+      {/* 05 — All 11 Committee Members */}
 
       <CommitteeSection full />
+
+      {/* 06 — Closing CTA */}
 
       <SectionCTA
         title="Make yourself part of the legacy."
@@ -130,17 +134,6 @@ export default function About() {
         href="/contact"
       />
 
-      {/* 06 — All 11 Committee Members */}
-
-      <CommitteeSection full />
-
-      {/* 07 — Existing Closing CTA */}
-
-      <SectionCTA
-        title="Make yourself part of the legacy."
-        label="Connect with us"
-        href="/contact"
-      />
     </div>
   );
 }
