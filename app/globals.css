@@ -313,6 +313,7 @@ button:disabled {
   height: 1px;
   background: #ffffff55;
   width: 150px;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -422,10 +423,6 @@ button:disabled {
   cursor: pointer;
 }
 
-.gallery-tile:nth-child(3n+2) .card-image {
-  height: 420px;
-}
-
 .filter {
   border: 1px solid #715f44;
   padding: 10px 15px;
@@ -497,9 +494,6 @@ button:disabled {
   }
   .gallery-tile {
     margin-bottom: 12px;
-  }
-  .gallery-tile .card-image, .gallery-tile:nth-child(3n+2) .card-image {
-    height: 210px;
   }
   .mobile-stack {
     flex-direction: column !important;
@@ -1124,10 +1118,6 @@ button:disabled {
     .testimonial-initials {
         font-size: 35px;
     }
-
-    .testimonial-controls {
-        margin-top: 22px;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1414,10 +1404,6 @@ button:disabled {
 .reference-committee-image img {
   object-fit: cover;
   object-position: center 20%;
-}
-
-.reference-committee-card:hover img {
-  transform: scale(1.04);
 }
 
 .reference-committee-info {
@@ -2512,4 +2498,47 @@ button:disabled {
     .timeline-marker span {
         transition: none;
     }
+}
+
+/* SMALL MOBILE — RESPONSIVE CORRECTIONS */
+
+@media (max-width: 480px) {
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 12px;
+  }
+
+  .stat {
+    min-width: 0;
+    padding: 0 8px;
+  }
+
+  .stat strong {
+    font-size: clamp(26px, 8vw, 36px);
+  }
+
+  .stat .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    overflow-wrap: anywhere;
+  }
+
+  .club-brand {
+    min-width: 0;
+  }
+
+  .club-brand-logo {
+    max-width: 100%;
+    height: 52px;
+  }
+
+  header .mobile-only {
+    flex-shrink: 0;
+  }
+   .hero-progress {
+    width: 60px;
+    flex-shrink: 1;
+  }
+
 }
