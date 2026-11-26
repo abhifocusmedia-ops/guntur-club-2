@@ -76,6 +76,7 @@ export default function CommitteeSection({
                   fill
                   sizes="(max-width: 768px) 50vw, 260px"
                   className="object-cover"
+                  quality={95}
                 />
 
               </div>

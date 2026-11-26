@@ -132,6 +132,7 @@ export default function AmenitiesShowcase() {
                   fill
                   sizes="(max-width: 768px) 100vw, 55vw"
                   className="image-cover"
+                  quality={95}
                 />
               </motion.div>
             ) : (

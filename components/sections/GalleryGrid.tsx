@@ -1,44 +1,64 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gallery } from "@/data/site";
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
 export default function GalleryGrid() {
   const [filter, setFilter] = useState("All");
   const [selected, setSelected] = useState<number | null>(null);
+
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
+
   const reduced = useReducedMotion();
+
   const options = ["All", ...new Set(gallery.map((g) => g.category))];
+
   const list =
     filter === "All" ? gallery : gallery.filter((g) => g.category === filter);
+
   const opened = selected !== null;
   const current = selected === null ? null : list[selected];
+
   function move(delta: number) {
+    if (!list.length) return;
+
     setSelected((i) =>
       i === null ? null : (i + delta + list.length) % list.length,
     );
   }
+
   useEffect(() => {
     const el = dialog.current;
+
     if (!opened || !el) return;
+
     const old = document.body.style.overflow;
     const opener = trigger.current;
+
     el.showModal();
     document.body.style.overflow = "hidden";
+
     closeButton.current?.focus();
+
     return () => {
       el.close();
       document.body.style.overflow = old;
-      if (opener?.isConnected) opener.focus({ preventScroll: true });
+
+      if (opener?.isConnected) {
+        opener.focus({ preventScroll: true });
+      }
     };
   }, [opened]);
 
   return (
     <>
+      {/* Gallery filters */}
+
       <div
         className="inner-filter gallery-filters"
         aria-label="Filter photographs"
@@ -57,13 +77,19 @@ export default function GalleryGrid() {
           </button>
         ))}
       </div>
+
+      {/* Photograph count */}
+
       <p className="gallery-result-count" role="status">
         {list.length} {list.length === 1 ? "photograph" : "photographs"}
       </p>
+
+      {/* Premium gallery cards */}
+
       <div className="gallery-grid gc-gallery-grid">
         {list.map((g, i) => (
           <motion.button
-            key={`${filter}-${g.image}`}
+            key={`${filter}-${g.image}-${i}`}
             type="button"
             className="gallery-tile block text-left w-full"
             aria-label={`Open image: ${g.title}`}
@@ -78,20 +104,74 @@ export default function GalleryGrid() {
               setSelected(i);
             }}
           >
-            <div className="card-image">
+            {/* Expandable photograph */}
+
+            <div className="gc-gallery-card-image card-image">
               <Image
                 src={g.image}
                 alt={g.title}
                 fill
-                sizes="(max-width:480px) 100vw, (max-width:1024px) 50vw, 33vw"
+                quality={95}
+                sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 440px"
                 className="image-cover"
               />
             </div>
-            <p className="eyebrow mt-4">{g.category}</p>
-            <h3 className="serif text-xl mt-1">{g.title}</h3>
+
+            {/* Black gradient overlay */}
+
+            <div className="gc-gallery-card-overlay" aria-hidden="true" />
+
+            {/* Default caption below image */}
+
+            <div className="gc-gallery-card-caption">
+              <p className="eyebrow">{g.category}</p>
+
+              <h3 className="serif">{g.title}</h3>
+            </div>
+
+            {/* Animated caption inside image */}
+
+            {/* Letter-by-letter animated caption */}
+
+            <div className="gc-gallery-hover-caption" aria-hidden="true">
+              <p className="eyebrow gc-gallery-hover-category">{g.category}</p>
+
+              <span className="serif gc-gallery-letter-title">
+                {g.title.split(" ").map((word, wordIndex, words) => {
+                  const offset = words
+                    .slice(0, wordIndex)
+                    .reduce((sum, item) => sum + item.length + 1, 0);
+
+                  return (
+                    <span className="gc-gallery-word" key={wordIndex}>
+                      {Array.from(word).map((letter, letterIndex) => (
+                        <span
+                          key={letterIndex}
+                          className="gc-gallery-letter"
+                          style={{
+                            transitionDelay: `${
+                              450 + (offset + letterIndex) * 35
+                            }ms`,
+                          }}
+                        >
+                          {letter}
+                        </span>
+                      ))}
+
+                      {wordIndex < words.length - 1 && "\u00A0"}
+                    </span>
+                  );
+                })}
+              </span>
+
+              <ArrowUpRight size={24} className="gc-gallery-hover-arrow" />
+            </div>
           </motion.button>
         ))}
       </div>
+
+      {/* Fullscreen gallery lightbox */}
+
       <dialog
         ref={dialog}
         className="gc-gallery-dialog"
@@ -106,13 +186,16 @@ export default function GalleryGrid() {
             e.preventDefault();
             move(1);
           }
+
           if (e.key === "ArrowLeft") {
             e.preventDefault();
             move(-1);
           }
         }}
         onClick={(e) => {
-          if (e.target === e.currentTarget) setSelected(null);
+          if (e.target === e.currentTarget) {
+            setSelected(null);
+          }
         }}
       >
         {current && (
@@ -126,18 +209,22 @@ export default function GalleryGrid() {
             >
               <X size={28} />
             </button>
+
             <div className="gc-gallery-full">
               <Image
                 src={current.image}
                 alt={current.title}
                 fill
-                sizes="95vw"
+                quality={100}
+                sizes="(max-width: 768px) 95vw, 1100px"
                 className="object-contain"
               />
             </div>
+
             <p className="serif text-xl" aria-live="polite">
               {current.title}
             </p>
+
             <div className="gc-gallery-controls">
               <button
                 className="btn"
@@ -147,9 +234,11 @@ export default function GalleryGrid() {
               >
                 <ArrowLeft size={20} />
               </button>
+
               <span>
                 {(selected ?? 0) + 1} / {list.length}
               </span>
+
               <button
                 className="btn"
                 type="button"

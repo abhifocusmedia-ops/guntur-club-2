@@ -97,6 +97,7 @@ export default function HeroSlider() {
                   priority={i === 0}
                   sizes="100vw"
                   className="image-cover"
+                  quality={95}
                 />
               </div>
             </div>

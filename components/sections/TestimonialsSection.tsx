@@ -64,6 +64,7 @@ function MemberPortrait({
             fill
             sizes="160px"
             className="testimonial-member-photo"
+            quality={95}
             onError={() => setImageError(true)}
           />
         ) : (
