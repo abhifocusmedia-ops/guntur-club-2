@@ -7,7 +7,6 @@
     --gold: #D4B163;
     --ivory: #F8F5ED;
     --muted: #B6AFA4;
-
     --font-heading: var(--font-cormorant, Georgia), serif;
     --font-body: var(--font-manrope, Arial), sans-serif;
 }
@@ -24,7 +23,6 @@ body {
   margin: 0;
   background: var(--ink);
   color: var(--ivory);
-  font-family: var(--font-body);
   overflow-x: hidden;
 }
 
@@ -103,8 +101,6 @@ button:disabled {
   gap: 23px;
 }
 
-
-
 /* =========================================
    GUNTUR CLUB — UNIFIED BUTTON SYSTEM
 ========================================= */
@@ -115,25 +111,19 @@ button:disabled {
     --btn-background: transparent;
     --btn-hover-background: #D4B163;
     --btn-hover-text: #150D0E;
-
     position: relative;
     isolation: isolate;
     overflow: hidden;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-
     min-height: 48px;
     padding: 15px 25px;
-
     border: 1px solid var(--btn-border);
     border-radius: 0;
-
     background: var(--btn-background);
     color: var(--btn-text);
-
     font-family: var(--font-body);
     font-size: 14px;
     font-weight: 600;
@@ -141,7 +131,6 @@ button:disabled {
     line-height: 1.5;
     text-transform: uppercase;
     text-align: center;
-
     transition:
         color 0.35s ease,
         border-color 0.35s ease;
@@ -157,13 +146,10 @@ button:disabled {
     bottom: 0;
     width: 51%;
     z-index: -1;
-
     background: var(--btn-hover-background);
-
     transform: scaleX(0);
     transition: transform 0.5s
         cubic-bezier(0.76, 0, 0.24, 1);
-
     pointer-events: none;
 }
 
@@ -271,7 +257,6 @@ header .btn {
         transition: none;
     }
 }
-
 
 .section {
   padding: clamp(85px, 11vw, 175px) 0;
@@ -826,32 +811,6 @@ header .btn {
   margin-bottom: 30px;
 }
 
-.pavilion-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 12px 24px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #D4B163;
-  border: 1px solid transparent;
-  transition: all 0.4s ease;
-}
-
-.pavilion-link svg {
-  transition: transform 0.4s ease;
-}
-
-.pavilion-link:hover {
-  border-color: rgba(212, 177, 99, 0.5);
-  background: rgba(212, 177, 99, 0.05);
-}
-
-.pavilion-link:hover svg {
-  transform: translate(4px, -4px);
-}
-
 .pavilion-artwork {
   position: absolute;
   inset: 0;
@@ -930,9 +889,6 @@ header .btn {
   .pavilion-art-lines {
     opacity: 0.1;
   }
-  .pavilion-link {
-    padding-left: 0;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -984,79 +940,8 @@ header .btn {
   background: #F8F5ED;
 }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-}
-
-.service-card {
-  position: relative;
-}
-
-.service-image {
-  position: relative;
-  overflow: hidden;
-}
-
-.service-image .service-photo {
-  height: 210px;
-  min-height: 0;
-}
-
-.service-number {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  color: #D4B163;
-  background: #150D0E;
-  padding: 10px 13px;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-}
-
-.service-content {
-  padding: 22px 0;
-  border-bottom: 1px solid #A7854355;
-}
-
-.service-content h3 {
-  font-family: var(--font-heading);
-  font-size: clamp(23px, 2vw, 29px);
-  font-weight: 400;
-  color: #211B17;
-  line-height: 1.25;
-}
-
-.service-content .body-copy {
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-.service-content .eyebrow, .home-services .eyebrow {
+.home-services .eyebrow {
   color: #927037;
-}
-
-.service-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: #927037;
-  font-size: 12px;
-  font-weight: 600;
-  margin-top: 18px;
-}
-
-.service-link svg {
-  transition: transform 0.35s ease;
-}
-
-.service-card:hover .service-link svg {
-  transform: translate(4px, -4px);
-}
-
-.service-card:hover img {
-  transform: scale(1.045);
 }
 
 /* GC PAVILION — REDUCE HEIGHT */
@@ -1076,54 +961,6 @@ header .btn {
 /* COMMITTEE SECTION */
 .home-committee {
   background: #F8F5ED;
-}
-
-.committee-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 930px;
-  margin: 0 auto;
-  gap: 35px;
-}
-
-.committee-card {
-  text-align: center;
-}
-
-.committee-photo {
-  width: 100%;
-  max-width: 245px;
-  height: 270px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #A78543;
-  background: #E9E0D0;
-}
-
-.committee-photo img {
-  transition: transform 0.8s ease;
-}
-
-.committee-card:hover img {
-  transform: scale(1.045);
-}
-
-.committee-placeholder {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #B5A58C;
-}
-
-.committee-name {
-  font-family: var(--font-heading);
-  font-size: 23px;
-  font-weight: 400;
-  color: #211B17;
-  margin-top: 18px;
-  line-height: 1.3;
 }
 
 .home-committee .eyebrow {
@@ -1276,7 +1113,6 @@ header .btn {
     }
 }
 
-
 .testimonial-quote {
   color: #D4B163;
   margin: 0 auto 18px;
@@ -1364,15 +1200,6 @@ header .btn {
   .home-page .editorial-grid .card-image {
     height: 340px;
   }
-  .services-grid {
-    gap: 20px;
-  }
-  .service-image .service-photo {
-    height: 185px;
-  }
-  .committee-grid {
-    gap: 22px;
-  }
 }
 
 /* MOBILE */
@@ -1389,37 +1216,11 @@ header .btn {
   .home-page .home-amenities .editorial-grid > div:first-child > div:first-child {
     height: 330px;
   }
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .service-image .service-photo {
-    height: 230px;
-  }
-  .service-content {
-    padding: 18px 0;
-  }
   .home-page .pavilion-image {
     aspect-ratio: auto;
   }
-  .committee-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 15px;
-  }
-  .committee-photo {
-    height: 210px;
-  }
-  .committee-name {
-    font-size: 19px;
-  }
   .testimonial-message {
     font-size: 21px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .service-card img, .committee-photo img, .service-link svg {
-    transition: none;
   }
 }
 
@@ -1782,8 +1583,6 @@ header .btn {
   margin-bottom: 35px;
 }
 
- 
-
 .full-committee img {
   object-fit: cover;
   object-position: center 20%;
@@ -1957,58 +1756,9 @@ header .btn {
   margin-inline: auto;
 }
 
-.home-page .reference-committee-grid {
-  width: 100%;
-  max-width: none;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  margin: 0;
-}
-
-.home-page .reference-committee-image {
-  width: 100%;
-  max-width: none;
-  height: 380px;
-  margin: 0;
-}
-
-.home-page .reference-committee-info {
-  padding: 20px 10px 0;
-}
-
-@media (max-width: 1024px) {
-  .home-page .reference-committee-grid {
-    gap: 20px;
-  }
-  .home-page .reference-committee-image {
-    height: 270px;
-  }
-}
-
-@media (max-width: 768px) {
-  .home-page .reference-committee-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 25px 15px;
-  }
-  .home-page .reference-committee-image {
-    height: 220px;
-  }
-  .home-page .reference-committee-card:last-child {
-    grid-column: 1 / -1;
-    width: calc(50% - 7.5px);
-    justify-self: center;
-  }
-}
-
 @media (max-width: 700px) {
   .home-page .container {
     width: calc(100% - 38px);
-  }
-}
-
-@media (max-width: 400px) {
-  .home-page .reference-committee-image {
-    height: 185px;
   }
 }
 
@@ -2269,7 +2019,6 @@ header .btn {
   }
 }
 
-
 /* =========================================
    ORIGINAL CLUB BRANDING
 ========================================= */
@@ -2384,7 +2133,6 @@ header .btn {
 
 .timeline-track {
     --timeline-marker-position: 86px;
-
     position: relative;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2690,7 +2438,6 @@ header .btn {
 
 }
 
-
 /* =========================================
    GUNTUR CLUB — PREMIUM TYPOGRAPHY
    Cormorant Garamond + Manrope
@@ -2717,7 +2464,6 @@ h4,
 .timeline-year,
 .testimonial-message,
 .testimonial-name,
-.committee-name,
 .stat strong {
     font-family: var(--font-heading);
     font-weight: 500;
@@ -2748,8 +2494,6 @@ h4,
 .btn,
 .gold-link,
 .reference-text-link,
-.service-link,
-.pavilion-link,
 .filter,
 .form-label {
     font-family: var(--font-body);
@@ -2773,7 +2517,6 @@ select {
     font-variant-numeric: lining-nums tabular-nums;
 }
 
-
 /* =========================================
    GLOBAL DESCRIPTION TYPOGRAPHY
 ========================================= */
@@ -2785,7 +2528,6 @@ select {
 .inner-page .inner-service-row .body-copy,
 .amenities-page .amenities-directory-copy .body-copy,
 .reference-service-content p,
-.service-content .body-copy,
 .pavilion-description,
 .home-page .pavilion-description,
 .amenities-preview-description,
@@ -2796,7 +2538,6 @@ select {
     line-height: 1.8;
     font-weight: 400;
 }
-
 
 /* =========================================
    COMPACT PREMIUM FOOTER
@@ -2865,4 +2606,339 @@ footer.site-footer {
         font-size: 12px;
         padding: 12px 16px;
     }
+}
+
+/* =========================================
+   HOMEPAGE — COMMITTEE CAROUSEL
+========================================= */
+
+.home-committee .gc-committee-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.home-committee .gc-committee-swiper {
+  width: 100%;
+  height: auto !important;
+  overflow: hidden;
+  padding: 16px 4px;
+}
+
+.gc-committee-swiper .swiper-wrapper {
+  align-items: center;
+}
+
+.gc-committee-swiper .swiper-slide {
+  height: auto;
+  min-width: 0;
+  overflow: visible;
+}
+
+/* Default side members */
+
+.gc-committee-slide-card {
+  --member-scale: 0.80;
+  --member-grayscale: 100%;
+  --member-brightness: 0.85;
+  --member-opacity: 0.75;
+  --member-active: 0;
+  --member-text-y: 110%;
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+/* Heritage frame */
+
+.gc-committee-frame {
+  position: relative;
+  width: 100%;
+  padding: 7px;
+  border: 1px solid #A7854370;
+  transform: scale(var(--member-scale));
+  opacity: var(--member-opacity);
+  transition:
+    transform 1.2s cubic-bezier(.22, 1, .36, 1),
+    opacity 0.9s ease;
+}
+
+.gc-committee-frame::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid #A7854340;
+  pointer-events: none;
+}
+
+/* Decorative gold corners */
+
+.gc-frame-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  z-index: 5;
+  border: 0 solid #A78543;
+  pointer-events: none;
+}
+
+.gc-frame-corner.top-left {
+  top: -2px;
+  left: -2px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.gc-frame-corner.top-right {
+  top: -2px;
+  right: -2px;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+
+.gc-frame-corner.bottom-left {
+  bottom: -2px;
+  left: -2px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.gc-frame-corner.bottom-right {
+  bottom: -2px;
+  right: -2px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* Member portrait */
+
+.home-committee .gc-committee-portrait {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: clamp(280px, 31vw, 400px);
+  overflow: hidden;
+  background: #E9E0D0;
+}
+
+.gc-committee-photo {
+  object-fit: cover;
+  object-position: center 20%;
+  filter:
+    grayscale(var(--member-grayscale))
+    brightness(var(--member-brightness));
+  transition: filter 1.1s ease;
+}
+
+/* Dark gradient inside photograph */
+
+.gc-committee-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(21, 13, 14, 0.98) 0%,
+    rgba(21, 13, 14, 0.82) 18%,
+    rgba(21, 13, 14, 0.28) 40%,
+    transparent 68%
+  );
+  opacity: var(--member-active);
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+
+/* Member details — inside bottom of image */
+
+.home-committee .gc-committee-details {
+  position: absolute;
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  min-height: 0;
+  padding: 20px 14px 26px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.gc-committee-name-mask,
+.gc-committee-role-mask {
+  overflow: hidden;
+}
+
+/* Member name */
+
+.home-committee .gc-committee-name {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 1.85vw, 29px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #F8F5ED;
+  margin: 0;
+  opacity: var(--member-active);
+  transform: translateY(var(--member-text-y));
+  transition:
+    transform 0.65s cubic-bezier(.22, 1, .36, 1),
+    opacity 0.45s ease;
+  transition-delay: var(--name-delay, 0s);
+}
+
+/* Member designation */
+
+.home-committee .gc-committee-role {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: #D4B163;
+  margin: 10px 0 0;
+  opacity: var(--member-active);
+  transform: translateY(var(--member-text-y));
+  transition:
+    transform 0.65s cubic-bezier(.22, 1, .36, 1),
+    opacity 0.45s ease;
+  transition-delay: var(--role-delay, 0s);
+}
+
+/* Decorative line above member name */
+
+.gc-committee-gold-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  margin: 0 auto 14px;
+  background: #D4B163;
+  opacity: var(--member-active);
+  transform: scaleX(var(--member-active));
+  transition:
+    transform 0.65s ease,
+    opacity 0.45s ease;
+}
+
+/* Desktop — two highlighted middle members */
+
+@media (min-width: 1025px) {
+  .gc-committee-swiper
+  .swiper-slide-next
+  .gc-committee-slide-card,
+
+  .gc-committee-swiper
+  .swiper-slide-next + .swiper-slide
+  .gc-committee-slide-card {
+    --member-scale: 1;
+    --member-grayscale: 0%;
+    --member-brightness: 1;
+    --member-opacity: 1;
+    --member-active: 1;
+    --member-text-y: 0%;
+    --name-delay: 0.35s;
+    --role-delay: 0.5s;
+  }
+}
+
+/* Tablet — one highlighted middle member */
+
+@media (min-width: 640px) and (max-width: 1024px) {
+  .home-committee .gc-committee-portrait {
+    height: clamp(250px, 35vw, 350px);
+  }
+
+  .gc-committee-swiper
+  .swiper-slide-next
+  .gc-committee-slide-card {
+    --member-scale: 1;
+    --member-grayscale: 0%;
+    --member-brightness: 1;
+    --member-opacity: 1;
+    --member-active: 1;
+    --member-text-y: 0%;
+    --name-delay: 0.35s;
+    --role-delay: 0.5s;
+  }
+
+  .home-committee .gc-committee-name {
+    font-size: 23px;
+  }
+}
+
+/* Mobile — active member */
+
+@media (max-width: 639px) {
+  .home-committee .gc-committee-carousel {
+    max-width: 340px;
+  }
+
+  .home-committee .gc-committee-portrait {
+    height: clamp(280px, 100vw, 400px);
+  }
+
+  .gc-committee-swiper
+  .swiper-slide-active
+  .gc-committee-slide-card {
+    --member-scale: 1;
+    --member-grayscale: 0%;
+    --member-brightness: 1;
+    --member-opacity: 1;
+    --member-active: 1;
+    --member-text-y: 0%;
+    --name-delay: 0.3s;
+    --role-delay: 0.45s;
+  }
+
+  .home-committee .gc-committee-name {
+    font-size: 26px;
+  }
+
+  .home-committee .gc-committee-role {
+    font-size: 11px;
+  }
+}
+
+/* Pause and resume control */
+
+.gc-committee-playback {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.gc-committee-playback button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #A7854366;
+  border-radius: 50%;
+  color: #927037;
+  background: transparent;
+  transition: color 0.3s, background 0.3s;
+}
+
+.gc-committee-playback button:hover {
+  background: #A78543;
+  color: #F8F5ED;
+}
+
+.home-committee .committee-bottom-link {
+  margin-top: 20px;
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .gc-committee-frame,
+  .gc-committee-photo,
+  .gc-committee-overlay,
+  .gc-committee-name,
+  .gc-committee-role,
+  .gc-committee-gold-line {
+    transition: none !important;
+  }
 }

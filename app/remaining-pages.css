@@ -304,12 +304,9 @@
 .gallery-inner .gc-gallery-grid {
   --gallery-image-height: 240px;
   --gallery-caption-height: 90px;
-
   columns: auto;
   display: grid;
-
   grid-template-columns: repeat(3, minmax(0, 1fr));
-
   gap: 26px 24px;
   align-items: stretch;
 }
@@ -321,18 +318,13 @@
 .gallery-inner .gc-gallery-grid .gallery-tile {
   position: relative;
   isolation: isolate;
-
   width: 100%;
   min-width: 0;
-
   height: calc(var(--gallery-image-height) + var(--gallery-caption-height));
-
   margin: 0;
   padding: 0;
-
   overflow: hidden;
   text-align: left;
-
   background: var(--inner-ivory);
   cursor: pointer;
 }
@@ -347,26 +339,20 @@
   .gallery-tile
   .gc-gallery-card-image {
   position: absolute;
-
   top: 0;
   left: 0;
   right: 0;
-
   width: 100%;
   height: var(--gallery-image-height);
-
   min-height: 0;
   max-height: none;
-
   overflow: hidden;
-
   transition: height 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .gc-gallery-card-image img {
   object-fit: cover;
   object-position: center;
-
   transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -376,15 +362,11 @@
 
 .gc-gallery-card-caption {
   position: absolute;
-
   left: 0;
   right: 0;
   bottom: 0;
-
   height: var(--gallery-caption-height);
-
   padding: 14px 2px 10px;
-
   transition:
     opacity 0.3s ease,
     transform 0.45s ease;
@@ -392,10 +374,8 @@
 
 .gallery-inner .gc-gallery-card-caption .eyebrow {
   color: var(--inner-gold);
-
   font-size: 13px;
   font-weight: 600;
-
   margin-bottom: 6px;
 }
 
@@ -404,7 +384,6 @@
   font-size: 25px;
   font-weight: 500;
   line-height: 1.2;
-
   color: var(--inner-text);
 }
 
@@ -415,21 +394,9 @@
 .gc-gallery-card-overlay {
   position: absolute;
   inset: 0;
-
   z-index: 2;
-
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.28) 35%,
-    rgba(0, 0, 0, 0.05) 70%,
-    transparent 100%
-  );
-
   opacity: 0;
   pointer-events: none;
-
-  transition: opacity 0.5s ease;
 }
 
 /* =========================================
@@ -438,48 +405,28 @@
 
 .gc-gallery-hover-caption {
   position: absolute;
-
-  left: 22px;
-  right: 22px;
-  bottom: 24px;
-
   z-index: 3;
-
-  display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 15px;
-
   color: var(--ivory);
-
-  opacity: 0;
-  transform: translateY(22px);
-
   pointer-events: none;
-
-  transition:
-    opacity 0.4s ease,
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .gallery-inner .gc-gallery-hover-caption .eyebrow {
   color: #e6cc92;
-
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
-
   margin-bottom: 8px;
 }
 
 .gc-gallery-hover-caption .serif {
   display: block;
-
   font-family: var(--font-heading);
   font-size: clamp(24px, 2vw, 30px);
   font-weight: 500;
   line-height: 1.2;
-
   color: #f8f5ed;
 }
 
@@ -565,20 +512,15 @@
 .gc-gallery-dialog {
   position: fixed;
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   max-width: none;
   max-height: none;
-
   margin: 0;
   border: 0;
   padding: 20px;
-
   background: #100b0af7;
   color: #f8f5ed;
-
   overflow: auto;
 }
 
@@ -589,14 +531,11 @@
 .gc-gallery-viewer {
   min-height: 100%;
   max-width: 1100px;
-
   margin: auto;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   gap: 16px;
   text-align: center;
 }
@@ -605,10 +544,8 @@
   position: sticky;
   top: 0;
   align-self: flex-end;
-
   color: #d4b163;
   background: #150d0e;
-
   padding: 8px;
   z-index: 2;
 }
@@ -623,7 +560,6 @@
   display: flex;
   align-items: center;
   gap: 18px;
-
   color: #d4b163;
 }
 
@@ -645,7 +581,6 @@
   .gallery-inner .gc-gallery-grid {
     --gallery-image-height: 210px;
     --gallery-caption-height: 90px;
-
     gap: 20px 14px;
   }
 
@@ -654,8 +589,6 @@
   }
 
   .gc-gallery-hover-caption {
-    left: 16px;
-    right: 16px;
     bottom: 18px;
   }
 }
@@ -663,7 +596,6 @@
 @media (max-width: 480px) {
   .gallery-inner .gc-gallery-grid {
     --gallery-image-height: 240px;
-
     grid-template-columns: 1fr;
     gap: 20px;
   }
@@ -712,10 +644,9 @@
   background: linear-gradient(
     135deg,
     rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0.30) 45%,
+    rgba(0, 0, 0, 0.3) 45%,
     rgba(0, 0, 0, 0.12) 100%
   );
-
   transition: opacity 0.3s ease;
 }
 
@@ -726,12 +657,9 @@
   left: 24px;
   right: 24px;
   bottom: auto;
-
   display: block;
-
   opacity: 1;
   transform: none;
-
   transition: none;
 }
 
@@ -748,7 +676,6 @@
 .gc-gallery-hover-category {
   opacity: 0;
   transform: translateY(8px);
-
   transition:
     opacity 0.3s ease,
     transform 0.35s ease;
@@ -758,12 +685,10 @@
 
 .gc-gallery-letter-title {
   display: block;
-
   font-family: var(--font-heading);
   font-size: clamp(26px, 2.2vw, 34px);
   font-weight: 500;
   line-height: 1.25;
-
   color: var(--ivory);
 }
 
@@ -776,31 +701,23 @@
 
 .gc-gallery-letter {
   display: inline-block;
-
   opacity: 0;
   transform: translateY(12px);
-
   transition:
     opacity 0.25s ease,
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-
   transition-delay: 0ms;
 }
 
 /* Arrow at bottom-right */
 
 .gc-gallery-hover-arrow {
-  position: fixed;
   position: absolute;
-
   right: 0;
   top: 0;
-
   color: var(--gold);
-
   opacity: 0;
   transform: translate(-8px, 8px);
-
   transition:
     opacity 0.35s ease,
     transform 0.4s ease;
@@ -809,7 +726,6 @@
 /* Sequential desktop hover */
 
 @media (hover: hover) and (pointer: fine) {
-
   .gallery-tile:hover .gc-gallery-hover-category {
     opacity: 1;
     transform: translateY(0);
@@ -821,7 +737,7 @@
     transform: translateY(0);
 
     /* Restore individual inline letter delays */
-  transition-delay: var(--letter-delay, 450ms);
+    transition-delay: var(--letter-delay, 450ms);
   }
 
   .gallery-tile:hover .gc-gallery-hover-arrow {
@@ -843,7 +759,6 @@
 /* Mobile spacing */
 
 @media (max-width: 768px) {
-
   .gc-gallery-hover-caption {
     top: 20px;
     left: 16px;
@@ -858,7 +773,6 @@
 /* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-
   .gc-gallery-hover-category,
   .gc-gallery-letter,
   .gc-gallery-hover-arrow {
